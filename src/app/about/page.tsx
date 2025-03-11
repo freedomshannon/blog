@@ -24,7 +24,7 @@
     import { Container } from '@/components/common/Container'
 
     const meta = {
-        title: '关于我 - Watch flowers bloom',
+        title: '关于我',
         description: '开发工程师，AI 马拉松，爬山，旅行。',
         url: `${WEBSITE_HOST_URL}/about`,
     }

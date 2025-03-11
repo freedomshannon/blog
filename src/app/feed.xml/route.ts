@@ -22,7 +22,7 @@ export async function GET() {
         url: `${WEBSITE_HOST_URL}${post.url}`,
         date: new Date(post.date),
         categories: [post.category],
-        author: 'Gino Zhang',
+        author: 'Shannon Wang',
       })
     })
 
