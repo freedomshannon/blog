@@ -4,7 +4,7 @@ import { metadata } from '@/lib/metadata'
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: metadata.title?.toString(),
-    short_name: 'Gino Notes',
+    short_name: 'Shannon Blog',
     description: metadata.description?.toString(),
     start_url: '/',
     display: 'standalone',
@@ -12,9 +12,14 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#ffffff',
     icons: [
       {
-        src: '/icon',
+        src: '/icon.jpg',
         sizes: '32x32',
-        type: 'image/png'
+        type: 'image/jpeg'
+      },
+      {
+        src: '/apple-icon.jpg',
+        sizes: '180x180',
+        type: 'image/jpeg'
       }
     ]
   }

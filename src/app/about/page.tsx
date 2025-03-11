@@ -92,7 +92,7 @@
         {
             icon: FaGithub,
             name: 'GitHub',
-            value: 'ginobefun',
+            value: 'Freedom-Shannon',
             link: 'https://github.com/freedomshannon',
             color: 'text-gray-800 dark:text-gray-200',
         },
@@ -122,7 +122,7 @@
                             Watch flowers bloom~
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-                            👋 你好！我是一名开发工程师，也是 AI 爱好者，喜欢爬山，旅行，喜欢看花开花落。
+                            👋 你好！我是一名开发工程师，也是 AI 爱好者，喜欢爬山，旅行，喜欢探索和经历未知！永远保持好奇心
                         </p>
                     </div>
 

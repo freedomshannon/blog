@@ -2,10 +2,10 @@ import { Metadata } from 'next'
 import { WEBSITE_HOST_URL } from './constants'
 
 const meta = {
-  title: 'Gino Notes',
-  description: "Gino Zhang's personal blog. I write about product, development and life.",
+  title: 'Shannon Blog',
+  description: "Shannon Wang's personal blog. I write about product, development and life.",
   image: `${WEBSITE_HOST_URL}/logo.jpg`,
-  author: 'Gino Zhang',
+  author: 'Shannon Wang',
 }
 
 // Schema.org 结构化数据
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(WEBSITE_HOST_URL),
   title: {
     default: meta.title,
-    template: '%s | Gino Notes',
+    template: '%s | Shannon Blog',
   },
   description: meta.description,
   openGraph: {
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       }
     ],
     card: 'summary_large_image',
-    creator: '@hongming731',
+    creator: '@Bright199678363',
   },
   alternates: {
     canonical: WEBSITE_HOST_URL,

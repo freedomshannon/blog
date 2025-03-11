@@ -1,23 +1,23 @@
 {
-  "name": "Gino Notes",
-  "short_name": "Gino",
+  "name": "Shannon Blog",
+  "short_name": "Shannon",
   "description": "记录学习和思考的内容，分享技术、人工智能、产品设计和生活随想。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "icons": [
-    {
-      "src": "/icon",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/apple-icon",
-      "sizes": "180x180",
-      "type": "image/png"
-    }
-  ],
+  {
+    "src": "/icon.jpg",
+    "sizes": "32x32",
+    "type": "image/jpeg"
+  },
+  {
+    "src": "/apple-icon.jpg",
+    "sizes": "180x180",
+    "type": "image/jpeg"
+  }
+],
   "orientation": "portrait",
   "lang": "zh-CN"
 }

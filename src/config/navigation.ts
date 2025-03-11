@@ -60,20 +60,18 @@ export const navigation: NavigationConfig = {
     },
   ],
   projects: [
-    { href: 'https://bestblogs.dev', label: 'BestBlogs.dev', icon: FaCode },
-    { href: 'https://wenrun.ai', label: 'WenRun.ai', icon: FaFeather },
-    { href: 'https://hiagent.io', label: 'HiAgent.io', icon: FaRobot },
-    { href: 'https://tiky.ai', label: 'Tiky.ai', icon: FaLightbulb },
+    { href: 'https://ming.shannonwang.top', label: '解析命理', icon: FaCode },
+    { href: 'https://shanon.top', label: '恋爱记录', icon: FaFeather },
   ],
   online: [
-    { href: 'https://github.com/ginobefun', label: 'GitHub', icon: FaGithub },
+    { href: 'https://github.com/freedomshannon', label: 'GitHub', icon: FaGithub },
     {
-      href: 'https://twitter.com/hongming731',
+      href: 'https://twitter.com/Bright199678363',
       label: 'Twitter',
       icon: FaTwitter,
     },
     {
-      href: 'https://mp.weixin.qq.com/s/5ulE6cqhyHDNhhDT08hOXA',
+      href: 'https://mp.weixin.qq.com/s/-8QyZlYrCZAocnajhmmOCA',
       label: '微信公众号',
       icon: FaWeixin,
     },
