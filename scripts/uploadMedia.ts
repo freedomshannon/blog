@@ -64,7 +64,7 @@ async function uploadToR2(filePath: string, key: string): Promise<string> {
 
     if (isDryRun) {
       console.log(`[测试模式] 将上传文件：${filePath} -> ${key}`);
-      return `${PUBLIC_URL}/${key}`;
+      return `${PUBLIC_URL}/${encodeURIComponent(key)}`;
     }
 
     await s3Client.send(
@@ -77,7 +77,7 @@ async function uploadToR2(filePath: string, key: string): Promise<string> {
       })
     );
 
-    return `${PUBLIC_URL}/${key}`;
+    return `${PUBLIC_URL}/${encodeURIComponent(key)}`;
   } catch (error) {
     console.error(`上传文件失败：${filePath}`, error);
     throw new Error(`上传文件失败：${filePath}`);
@@ -149,13 +149,14 @@ async function processMdxFile(mdxPath: string): Promise<void> {
       const r2Url = await processLocalFile(coverPath);
       if (r2Url !== coverPath) {
         const quotes = startQuote || '';
+        const encodedR2Url = r2Url.replace(/ /g, '%20');
         content = content.replace(
           fullMatch,
-          `cover: ${quotes}${r2Url}${quotes}`
+          `cover: ${quotes}${encodedR2Url}${quotes}`
         );
         processedFiles.add(coverPath);
         hasChanges = true;
-        console.log(`更新 cover 字段：${coverPath} -> ${r2Url}`);
+        console.log(`更新 cover 字段：${coverPath} -> ${encodedR2Url}`);
       }
     }
   }
@@ -170,13 +171,15 @@ async function processMdxFile(mdxPath: string): Promise<void> {
     const r2Url = await processLocalFile(mediaPath);
     
     if (r2Url !== mediaPath) {
+      // 对于包含空格的文件名，需要在 URL 中编码，但在文件替换时使用原始路径
+      const encodedR2Url = r2Url.replace(/ /g, '%20');
       content = content.replace(
         new RegExp(mediaPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
-        r2Url
+        encodedR2Url
       );
       processedFiles.add(mediaPath);
       hasChanges = true;
-      console.log(`更新媒体引用：${mediaPath} -> ${r2Url}`);
+      console.log(`更新媒体引用：${mediaPath} -> ${encodedR2Url}`);
     }
   }
 

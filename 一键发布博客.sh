@@ -98,11 +98,31 @@ echo "🖼️ 第2步: 同步图片..."
 # 同步图片文件
 if [ -d "$OBSIDIAN_VAULT/博客图片/images" ]; then
     rsync -av --delete "$OBSIDIAN_VAULT/博客图片/images/" "$BLOG_DIR/public/images/" --exclude="*.DS_Store"
+    
+    # 重命名图片文件，将空格替换为下划线
+    find "$BLOG_DIR/public/images/" -name "* *" -type f | while read file; do
+        newname=$(echo "$file" | tr ' ' '_')
+        if [ "$file" != "$newname" ]; then
+            mv "$file" "$newname"
+            echo "  重命名图片: $(basename "$file") -> $(basename "$newname")"
+        fi
+    done
+    
     echo "✅ 内容图片同步完成"
 fi
 
 if [ -d "$OBSIDIAN_VAULT/博客图片/covers" ]; then
     rsync -av --delete "$OBSIDIAN_VAULT/博客图片/covers/" "$BLOG_DIR/public/covers/" --exclude="*.DS_Store"
+    
+    # 重命名封面文件，将空格替换为下划线
+    find "$BLOG_DIR/public/covers/" -name "* *" -type f | while read file; do
+        newname=$(echo "$file" | tr ' ' '_')
+        if [ "$file" != "$newname" ]; then
+            mv "$file" "$newname"
+            echo "  重命名封面: $(basename "$file") -> $(basename "$newname")"
+        fi
+    done
+    
     echo "✅ 封面图片同步完成"
 fi
 
