@@ -90,9 +90,10 @@ export const metadata: Metadata = {
     },
     icons: {
         icon: [
-            { url: `${WEBSITE_HOST_URL}/avatar.jpg`, type: 'image/jpeg', sizes: '32x32' }
+            { url: `${WEBSITE_HOST_URL}/icon.jpg`, type: 'image/jpeg', sizes: '32x32' },
+            { url: `${WEBSITE_HOST_URL}/favicon.ico`, type: 'image/x-icon', sizes: '16x16' }
         ],
-        apple: `${WEBSITE_HOST_URL}/avatar.jpg`,
+        apple: `${WEBSITE_HOST_URL}/apple-icon.jpg`,
     },
     manifest: `${WEBSITE_HOST_URL}/manifest.json`,
 }
@@ -105,11 +106,11 @@ export default function RootLayout({
     return (
         <html lang={WEBSITE_LANGUAGE} suppressHydrationWarning>
             <head>
-                <link rel="icon" type="image/jpeg" href="/avatar.jpg" />
-                <link rel="shortcut icon" type="image/jpeg" href="/avatar.jpg" />
+                <link rel="icon" type="image/jpeg" href="/icon.jpg" />
+                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
                 <link rel="manifest" href={`${WEBSITE_HOST_URL}/manifest.json`} />
                 <meta name="theme-color" content="#ffffff" />
-                <link rel="apple-touch-icon" href={`${WEBSITE_HOST_URL}/avatar.jpg`} />
+                <link rel="apple-touch-icon" href={`${WEBSITE_HOST_URL}/apple-icon.jpg`} />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
