@@ -14,11 +14,34 @@ echo "📁 第1步: 同步文章..."
 
 # 同步文章文件
 if [ -d "$OBSIDIAN_VAULT/博客文章" ]; then
-    rsync -av --delete "$OBSIDIAN_VAULT/博客文章/" "$BLOG_DIR/posts/"         --exclude="*.DS_Store"         --exclude="📝 文章模板.md"
+    rsync -av --delete "$OBSIDIAN_VAULT/博客文章/" "$BLOG_DIR/posts/" \
+        --exclude="*.DS_Store" \
+        --exclude="📝 文章模板.md"
     
-    # 转换 .md 为 .mdx
+    # 转换 .md 为 .mdx 并修复格式
     find "$BLOG_DIR/posts/" -name "*.md" -type f | while read file; do
         mv "$file" "${file%.md}.mdx"
+    done
+    
+    # 修复 Obsidian 格式问题
+    find "$BLOG_DIR/posts/" -name "*.mdx" -type f | while read file; do
+        echo "  修复格式: $(basename "$file")"
+        
+        # 转换 Obsidian 图片格式
+        sed -i '' 's/!\[\[\([^]]*\)\]\]/![图片](\/images\/\1)/g' "$file"
+        
+        # 确保 title 和 description 有引号
+        sed -i '' 's/^title: \([^"]\)/title: "\1/g' "$file"
+        sed -i '' 's/^description: \([^"]\)/description: "\1/g' "$file"
+        
+        # 检查是否缺少 cover 字段
+        if ! grep -q "^cover:" "$file"; then
+            echo "    添加默认封面"
+            # 在 tags 行后添加默认 cover
+            sed -i '' '/^tags:/a\
+cover: /covers/default.jpg
+' "$file"
+        fi
     done
     
     echo "✅ 文章同步完成"
