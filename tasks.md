@@ -1,4 +1,4 @@
-# GinoNotes 博客优化任务清单
+# ShannonNotes 博客优化任务清单
 
 ## 布局优化
 

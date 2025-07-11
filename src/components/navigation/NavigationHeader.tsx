@@ -20,13 +20,13 @@ export function NavigationHeader({ onMenuClick, onSearchClick }: NavigationHeade
         <div className="flex items-center gap-3">
           <Image
             src="/avatar.jpg"
-            alt="Gino"
+            alt="Shannon"
             width={32}
             height={32}
             className="rounded-full"
           />
           <span className="font-medium text-gray-900 dark:text-gray-100">
-            Gino
+            Shannon
           </span>
         </div>
         <div className="flex items-center gap-2">

@@ -1,4 +1,4 @@
-# GinoNotes 博客项目文档
+# ShannonNotes 博客项目文档
 
 这是一个基于 Next.js 14 + Tailwind CSS + contentlayer 构建的个人博客项目。
 

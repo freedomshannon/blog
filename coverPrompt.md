@@ -1,4 +1,4 @@
-# GinoNotes Blog Cover Image Prompt Guide
+# ShannonNotes Blog Cover Image Prompt Guide
 
 本文档用于指导生成博客文章封面图的提示词编写。所有封面图应保持统一的设计语言和视觉风格，确保整个博客的一致性。
 

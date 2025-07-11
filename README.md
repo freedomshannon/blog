@@ -1,6 +1,6 @@
-# GinoNotes Blog
+# ShannonNotes Blog
 
-这是我的个人博客网站 [ginonotes.com](https://ginonotes.com)，基于现代 Web 技术栈构建，专注于提供清新、整洁的阅读体验。
+这是我的个人博客网站 [Shannonnotes.com](https://Shannonnotes.com)，基于现代 Web 技术栈构建，专注于提供清新、整洁的阅读体验。
 
 > 本项目基于 [ChangoMan/nextjs-mdx-blog](https://github.com/ChangoMan/nextjs-mdx-blog) 开发，感谢该项目提供的优秀起点。在此基础上，我们进行了大量定制化开发，包括界面重设计、功能增强和性能优化等。
 
@@ -35,8 +35,8 @@
 1. 克隆仓库：
 
 ```bash
-git clone https://github.com/yourusername/ginonotes-blog.git
-cd ginonotes-blog
+git clone https://github.com/yourusername/Shannonnotes-blog.git
+cd Shannonnotes-blog
 ```
 
 2. 安装依赖：

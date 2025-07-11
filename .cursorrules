@@ -1,4 +1,4 @@
-这是我个人的博客网站 ginonotes.com，基于 Next.js 14 + Tailwind CSS + contentlayer 构建。请遵循以下规则：
+这是我个人的博客网站 Shannonnotes.com，基于 Next.js 14 + Tailwind CSS + contentlayer 构建。请遵循以下规则：
 
 1. 确保网站的风格和布局一致，保持清新、整洁、科技的风格，保证读者的阅读体验最佳。
 2. 请遵循 Next.js 14、React 18、TypeScript、Tailwind CSS、contentlayer 的官方文档和最佳实践。

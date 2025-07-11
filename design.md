@@ -1,4 +1,4 @@
-# GinoNotes 博客设计规范
+# ShannonNotes 博客设计规范
 
 ## 布局规范
 
