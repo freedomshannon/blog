@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo "🎯 第3步：获取 R2 API 凭据"
+echo "=========================="
+echo ""
+
+echo "✅ 存储桶已创建成功：blog-media-shannon"
+echo "✅ 账户 ID 已配置：66777fa17d4b449baf96e72d11684922"
+echo ""
+
+echo "🔑 现在需要创建 R2 API Token："
+echo ""
+echo "1. 我将为您自动打开 Cloudflare API Tokens 页面"
+echo "2. 请按照以下步骤操作："
+echo ""
+echo "   📋 在页面上操作："
+echo "   ✅ 点击 'Create Token'"
+echo "   ✅ 选择 'Custom token'"
+echo "   ✅ Token name: blog-r2-api"
+echo "   ✅ Permissions: 选择 'Cloudflare R2:Edit'"
+echo "   ✅ Account resources: Include - All accounts"
+echo "   ✅ 点击 'Continue to summary'"
+echo "   ✅ 点击 'Create Token'"
+echo ""
+echo "3. 复制显示的 Access Key ID 和 Secret Access Key"
+echo ""
+
+# 打开 API Token 创建页面
+echo "🌐 正在打开 Cloudflare API Tokens 页面..."
+open "https://dash.cloudflare.com/profile/api-tokens"
+
+echo ""
+echo "⏳ 请在浏览器中完成 API Token 创建..."
+echo ""
+echo "完成后，请运行：nano .env"
+echo "并添加以下两行（替换为实际的值）："
+echo ""
+echo "R2_ACCESS_KEY_ID=你的Access_Key_ID"
+echo "R2_SECRET_ACCESS_KEY=你的Secret_Access_Key"
+echo ""
+echo "保存后运行：./test-r2-config.sh 进行测试"
