@@ -105,6 +105,8 @@ export default function RootLayout({
     return (
         <html lang={WEBSITE_LANGUAGE} suppressHydrationWarning>
             <head>
+                <link rel="icon" type="image/jpeg" href="/avatar.jpg" />
+                <link rel="shortcut icon" type="image/jpeg" href="/avatar.jpg" />
                 <link rel="manifest" href={`${WEBSITE_HOST_URL}/manifest.json`} />
                 <meta name="theme-color" content="#ffffff" />
                 <link rel="apple-touch-icon" href={`${WEBSITE_HOST_URL}/avatar.jpg`} />
