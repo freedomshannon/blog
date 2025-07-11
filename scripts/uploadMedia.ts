@@ -201,6 +201,12 @@ async function cleanupUnusedMedia(): Promise<void> {
   const references = await collectMediaReferences();
   console.log(`在 MDX 文件中找到 ${references.size} 个媒体引用`);
 
+  // 如果没有本地引用（都是 CDN 链接），跳过清理
+  if (references.size === 0) {
+    console.log('所有媒体都已上传到 CDN，跳过清理本地文件');
+    return;
+  }
+
   // 获取 public/images 目录下的所有文件
   const imagesDir = path.join(process.cwd(), config.paths.public, config.paths.images);
   if (!fs.existsSync(imagesDir)) {
