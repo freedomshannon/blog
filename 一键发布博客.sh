@@ -27,12 +27,55 @@ if [ -d "$OBSIDIAN_VAULT/博客文章" ]; then
     find "$BLOG_DIR/posts/" -name "*.mdx" -type f | while read file; do
         echo "  修复格式: $(basename "$file")"
         
-        # 转换 Obsidian 图片格式
+        # 转换 Obsidian 图片格式 ![[image.png]] 为 ![图片](/images/image.png)
         sed -i '' 's/!\[\[\([^]]*\)\]\]/![图片](\/images\/\1)/g' "$file"
         
         # 确保 title 和 description 有引号
         sed -i '' 's/^title: \([^"]\)/title: "\1/g' "$file"
         sed -i '' 's/^description: \([^"]\)/description: "\1/g' "$file"
+        
+        # 转换 YAML 数组格式的 tags 为逗号分隔格式
+        if grep -q "^  - " "$file"; then
+            echo "    转换 tags 格式"
+            python3 -c "
+import re
+import sys
+
+with open('$file', 'r') as f:
+    content = f.read()
+
+# 转换 YAML 数组格式的 tags
+lines = content.split('\n')
+new_lines = []
+in_tags = False
+tags_values = []
+
+for line in lines:
+    if line.startswith('tags:'):
+        in_tags = True
+        continue
+    elif in_tags and line.startswith('  - '):
+        tags_values.append(line.replace('  - ', '').strip())
+        continue
+    elif in_tags and not line.startswith('  '):
+        # tags 结束
+        if tags_values:
+            new_lines.append('tags: ' + ', '.join(tags_values))
+        new_lines.append(line)
+        in_tags = False
+        tags_values = []
+    else:
+        if not in_tags:
+            new_lines.append(line)
+
+# 如果文件末尾还有 tags
+if in_tags and tags_values:
+    new_lines.append('tags: ' + ', '.join(tags_values))
+
+with open('$file', 'w') as f:
+    f.write('\n'.join(new_lines))
+"
+        fi
         
         # 检查是否缺少 cover 字段
         if ! grep -q "^cover:" "$file"; then
