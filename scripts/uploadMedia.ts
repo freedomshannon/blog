@@ -129,7 +129,7 @@ async function processLocalFile(localPath: string): Promise<string> {
     return r2Url;
   }
 
-  return `${PUBLIC_URL}/${key}`;
+    return `${PUBLIC_URL}/${encodeURIComponent(key)}`;
 }
 
 // 处理 MDX 文件中的媒体引用
@@ -149,14 +149,13 @@ async function processMdxFile(mdxPath: string): Promise<void> {
       const r2Url = await processLocalFile(coverPath);
       if (r2Url !== coverPath) {
         const quotes = startQuote || '';
-        const encodedR2Url = r2Url.replace(/ /g, '%20');
         content = content.replace(
           fullMatch,
-          `cover: ${quotes}${encodedR2Url}${quotes}`
+          `cover: ${quotes}${r2Url}${quotes}`
         );
         processedFiles.add(coverPath);
         hasChanges = true;
-        console.log(`更新 cover 字段：${coverPath} -> ${encodedR2Url}`);
+        console.log(`更新 cover 字段：${coverPath} -> ${r2Url}`);
       }
     }
   }
@@ -171,15 +170,13 @@ async function processMdxFile(mdxPath: string): Promise<void> {
     const r2Url = await processLocalFile(mediaPath);
     
     if (r2Url !== mediaPath) {
-      // 对于包含空格的文件名，需要在 URL 中编码，但在文件替换时使用原始路径
-      const encodedR2Url = r2Url.replace(/ /g, '%20');
       content = content.replace(
         new RegExp(mediaPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
-        encodedR2Url
+        r2Url
       );
       processedFiles.add(mediaPath);
       hasChanges = true;
-      console.log(`更新媒体引用：${mediaPath} -> ${encodedR2Url}`);
+      console.log(`更新媒体引用：${mediaPath} -> ${r2Url}`);
     }
   }
 
