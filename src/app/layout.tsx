@@ -90,9 +90,9 @@ export const metadata: Metadata = {
     },
     icons: {
         icon: [
-            { url: `${WEBSITE_HOST_URL}/icon`, type: 'image/png', sizes: '32x32' }
+            { url: `${WEBSITE_HOST_URL}/avatar.jpg`, type: 'image/jpeg', sizes: '32x32' }
         ],
-        apple: `${WEBSITE_HOST_URL}/apple-icon`,
+        apple: `${WEBSITE_HOST_URL}/avatar.jpg`,
     },
     manifest: `${WEBSITE_HOST_URL}/manifest.json`,
 }
@@ -107,7 +107,7 @@ export default function RootLayout({
             <head>
                 <link rel="manifest" href={`${WEBSITE_HOST_URL}/manifest.json`} />
                 <meta name="theme-color" content="#ffffff" />
-                <link rel="apple-touch-icon" href={`${WEBSITE_HOST_URL}/apple-icon`} />
+                <link rel="apple-touch-icon" href={`${WEBSITE_HOST_URL}/avatar.jpg`} />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
