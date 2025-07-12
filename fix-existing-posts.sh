@@ -6,6 +6,24 @@ echo "=================="
 BLOG_DIR="/Users/shannonwang/Documents/blog"
 cd "$BLOG_DIR"
 
+# 首先规范化文件名
+echo "📁 规范化文件名..."
+find "$BLOG_DIR/posts/" -name "*.mdx" -type f | while read file; do
+    dir=$(dirname "$file")
+    basename=$(basename "$file" .mdx)
+    
+    # 规范化文件名：空格替换为连字符，移除特殊字符
+    new_basename=$(echo "$basename" | sed 's/ /-/g' | sed 's/[^a-zA-Z0-9\u4e00-\u9fa5_-]//g' | sed 's/-\+/-/g' | sed 's/^-\|-$//g')
+    
+    if [ "$basename" != "$new_basename" ]; then
+        new_file="$dir/$new_basename.mdx"
+        echo "  重命名文件: $basename.mdx -> $new_basename.mdx"
+        mv "$file" "$new_file"
+    fi
+done
+
+echo ""
+
 # 修复现有的 MDX 文件
 find "$BLOG_DIR/posts/" -name "*.mdx" -type f | while read file; do
     echo "🔍 检查文件: $(basename "$file")"

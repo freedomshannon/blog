@@ -23,7 +23,7 @@ export const Post = defineDocumentType(() => ({
     url: {
       type: 'string',
       resolve: (post): PostRoute => {
-        const slug = (post.slug || post._raw.flattenedPath).replace(/_/g, '-')
+        const slug = post.slug || post._raw.flattenedPath
         return createPostRoute(slug)
       },
     },

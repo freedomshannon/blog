@@ -23,6 +23,22 @@ if [ -d "$OBSIDIAN_VAULT/博客文章" ]; then
         mv "$file" "${file%.md}.mdx"
     done
     
+    # 规范化文件名：移除空格和特殊字符
+    find "$BLOG_DIR/posts/" -name "*.mdx" -type f | while read file; do
+        dir=$(dirname "$file")
+        basename=$(basename "$file" .mdx)
+        
+        # 规范化文件名：空格替换为连字符，移除特殊字符
+        new_basename=$(echo "$basename" | sed 's/ /-/g' | sed 's/[^a-zA-Z0-9\u4e00-\u9fa5_-]//g' | sed 's/-\+/-/g' | sed 's/^-\|-$//g')
+        
+        if [ "$basename" != "$new_basename" ]; then
+            new_file="$dir/$new_basename.mdx"
+            echo "  重命名文件: $basename.mdx -> $new_basename.mdx"
+            mv "$file" "$new_file"
+            file="$new_file"  # 更新变量以便后续处理
+        fi
+    done
+    
     # 修复 Obsidian 格式问题
     find "$BLOG_DIR/posts/" -name "*.mdx" -type f | while read file; do
         echo "  修复格式: $(basename "$file")"
