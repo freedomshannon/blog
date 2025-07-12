@@ -46,6 +46,9 @@ if [ -d "$OBSIDIAN_VAULT/博客文章" ]; then
         # 转换 Obsidian 图片格式 ![[image.png]] 为 ![图片](/images/image.png)
         sed -i '' 's/!\[\[\([^]]*\)\]\]/![图片](\/images\/\1)/g' "$file"
         
+        # 修复图片路径中的空格问题
+        sed -i '' 's|/images/\([^)]*\) \([^)]*\)|/images/\1_\2|g' "$file"
+        
         # 修复 frontmatter 格式问题
         python3 -c "
 import re
