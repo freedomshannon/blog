@@ -34,8 +34,13 @@ normalize_filenames() {
         dir=$(dirname "$file")
         basename=$(basename "$file" .mdx)
         
-        # 规范化文件名：空格替换为连字符，移除特殊字符
-        new_basename=$(echo "$basename" | sed 's/ /-/g' | sed 's/[^a-zA-Z0-9\u4e00-\u9fa5_-]//g' | sed 's/-\+/-/g' | sed 's/^-\|-$//g')
+        # 规范化文件名：空格替换为连字符，移除特殊字符，保留中文
+        new_basename=$(echo "$basename" | sed 's/ /-/g' | sed 's/[^a-zA-Z0-9\u4e00-\u9fff_-]//g' | sed 's/-\+/-/g' | sed 's/^-\|-$//g')
+        
+        # 如果处理后为空，使用时间戳
+        if [ -z "$new_basename" ]; then
+            new_basename="article-$(date +%Y%m%d%H%M%S)"
+        fi
         
         if [ "$basename" != "$new_basename" ]; then
             new_file="$dir/$new_basename.mdx"
