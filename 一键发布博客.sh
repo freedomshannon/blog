@@ -30,9 +30,32 @@ if [ -d "$OBSIDIAN_VAULT/博客文章" ]; then
         # 转换 Obsidian 图片格式 ![[image.png]] 为 ![图片](/images/image.png)
         sed -i '' 's/!\[\[\([^]]*\)\]\]/![图片](\/images\/\1)/g' "$file"
         
-        # 确保 title 和 description 有引号
-        sed -i '' 's/^title: \([^"]\)/title: "\1/g' "$file"
-        sed -i '' 's/^description: \([^"]\)/description: "\1/g' "$file"
+        # 修复 frontmatter 格式问题
+        python3 -c "
+import re
+import sys
+
+with open('$file', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# 分离 frontmatter 和内容
+parts = content.split('---', 2)
+if len(parts) >= 3:
+    frontmatter = parts[1]
+    main_content = parts[2]
+    
+    # 修复 title 字段
+    frontmatter = re.sub(r'^title:\s*\"?([^\"]*?)\"?\s*$', r'title: \"\1\"', frontmatter, flags=re.MULTILINE)
+    
+    # 修复 description 字段  
+    frontmatter = re.sub(r'^description:\s*\"?([^\"]*?)\"?\s*$', r'description: \"\1\"', frontmatter, flags=re.MULTILINE)
+    
+    # 重新组合内容
+    content = '---' + frontmatter + '---' + main_content
+
+with open('$file', 'w', encoding='utf-8') as f:
+    f.write(content)
+"
         
         # 转换 YAML 数组格式的 tags 为逗号分隔格式
         if grep -q "^  - " "$file"; then
@@ -140,7 +163,23 @@ else
 fi
 
 echo ""
-echo "📦 第4步: 提交到 Git..."
+echo "✅ 第4步: 验证文章格式..."
+
+# 验证构建是否成功
+if npm run build > /tmp/build.log 2>&1; then
+    echo "✅ 文章格式验证通过"
+    rm -f /tmp/build.log
+else
+    echo "❌ 文章格式验证失败，请检查以下错误:"
+    echo "=================="
+    cat /tmp/build.log | grep -A 5 -B 5 "Error\|Failed\|问题"
+    echo "=================="
+    echo "ℹ️ 完整日志已保存到 /tmp/build.log"
+    exit 1
+fi
+
+echo ""
+echo "📦 第5步: 提交到 Git..."
 
 # 检查是否有更改
 if git diff --quiet && git diff --cached --quiet; then
@@ -160,7 +199,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 fi
 
 echo ""
-echo "🚀 第5步: 推送到 GitHub..."
+echo "🚀 第6步: 推送到 GitHub..."
 
 if git push origin main; then
     echo "✅ 推送到 GitHub 成功"
